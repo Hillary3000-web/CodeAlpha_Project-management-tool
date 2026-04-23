@@ -30,7 +30,8 @@ export default function Board() {
   useEffect(() => {
     loadProject();
     
-    const newSocket = io('http://localhost:3000');
+    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:3000';
+    const newSocket = io(SOCKET_URL);
     newSocket.emit('join-project', id);
     newSocket.on('board-updated', () => {
       loadProject();
